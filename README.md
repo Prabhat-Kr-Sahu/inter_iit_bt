@@ -186,7 +186,7 @@ if __name__ == '__main__':
 ## Customization
 
 - Modify the parameters for stop loss and trailing stop percentages when adding the strategy using the `run_backtest` function.
-- here you can use your default params for the backtest like ----
+- here you can use your default params for the backtest like ----   run_backtest(data, EMACrossoverStrategy, stop_loss_pct=0.15, trailing_stop_pct=0.1, capital=10000, commission_rate=0.15)
 - You can also change the logic in the `next` method of the strategy to define custom buy/sell conditions.
 
 ## Requirements
