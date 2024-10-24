@@ -2,6 +2,32 @@
 
 This strategy implementation is built on the **Backtrader** library and offers a base class to facilitate the addition of custom trading strategies. It incorporates features such as stop loss, trailing stop, trade history logging, and performance tracking.
 
+
+## how to use -
+define the strategy in the given part in the similar manner and hence use it.
+```python
+########################### define the strategy here ################################
+class EMACrossoverStrategy(BaseStrategy):
+    def __init__(self):
+        super().__init__()
+        self.short_ema = bt.indicators.EMA(self.data.close, period=20)
+        self.long_ema = bt.indicators.EMA(self.data.close, period=50)
+
+    def next(self):
+        # Buy when short EMA crosses above long EMA
+        if self.short_ema[0] > self.long_ema[0] and self.short_ema[-1] <= self.long_ema[-1]:
+            size = self.broker.getvalue() / self.data.close[0]
+            self.buy_signal(size)
+        
+        # Sell when short EMA crosses below long EMA
+        elif self.short_ema[0] < self.long_ema[0] and self.current_stocks > 0:
+            self.sell_signal()
+
+#########################################################################################
+```
+
+
+
 ## Overview
 
 The base strategy class `BaseStrategy` offers the following functionality:
@@ -99,14 +125,6 @@ class PerformanceAnalyzer(bt.Analyzer):
         return {'total_trades': self.total_trades}
 ```
 
-### Data Loading
-
-This function loads a `pandas` DataFrame into a Backtrader data feed.
-
-```python
-def load_data(data):
-    return bt.feeds.PandasData(dataname=data, datetime='datetime', open='open', high='high', low='low', close='close', volume='volume')
-```
 
 ### Running the Backtest
 
