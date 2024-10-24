@@ -158,4 +158,4 @@ if __name__ == '__main__':
     data = pd.read_csv('btcusdt_1h.csv', parse_dates=['datetime'])
 
     # Run backtest with your chosen strategy (e.g., EMACrossoverStrategy)
-    run_backtest(data, EMACrossoverStrategy)
+    run_backtest(data, EMACrossoverStrategy, stop_loss_pct=0.15, trailing_stop_pct=0.1, capital=10000, commission_rate=0.15)
