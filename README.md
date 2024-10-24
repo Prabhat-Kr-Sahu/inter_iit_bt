@@ -186,6 +186,7 @@ if __name__ == '__main__':
 ## Customization
 
 - Modify the parameters for stop loss and trailing stop percentages when adding the strategy using the `run_backtest` function.
+- here you can use your default params for the backtest like ----
 - You can also change the logic in the `next` method of the strategy to define custom buy/sell conditions.
 
 ## Requirements
